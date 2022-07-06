@@ -3,8 +3,7 @@
 WiFiClient client;
 WiFiServer server(80);
 
-#define led D5
-#define led2 D6
+#define led D1
 
 void setup() 
 {
@@ -21,7 +20,6 @@ void setup()
   Serial.println(WiFi.localIP());
   server.begin();
   pinMode(led, OUTPUT);
-  pinMode(led2, OUTPUT);
 }
 
 void loop() 
@@ -41,14 +39,6 @@ void loop()
     {
       digitalWrite(led, LOW);
     }
-    if(request == "GET /led2on HTTP/1.1")
-    {
-      digitalWrite(led2, HIGH);
-    }
-    if(request == "GET /led2off HTTP/1.1")
-    {
-      digitalWrite(led2, LOW);
-    }
   }
 
   client.println("<!DOCTYPE HTML>");
@@ -58,7 +48,6 @@ void loop()
   client.println("<br>");
   client.println("<a href=\"/led1on\"\"><button>LED 1 ON</button></a>");
   client.println("<a href=\"/led1off\"\"><button>LED 1 OFF</button></a><br/>");
-  client.println("<a href=\"/led2on\"\"><button>LED 2 ON</button></a>");
-  client.println("<a href=\"/led2off\"\"><button>LED 2 OFF</button></a><br/>");
+
   client.println("</html>");
 }
